@@ -50,9 +50,8 @@
       console.log('Received Ping: ', data);
   });
 
-  socket.on('chat', function(msg, callback){
-      $('#messages').append($('<li>').text(msg.body));
-      callback(true);
+  socket.on('chat', function(msg){
+      $('#messages').append($('<li>').text(msg));
     });
   socket.on('connect', () => {
       console.log('connected')
@@ -77,5 +76,6 @@
   form.onsubmit = (event) => {
       event.preventDefault();
       socket.emit('message', message.value);
+      message.value = '';
   }
 </script>

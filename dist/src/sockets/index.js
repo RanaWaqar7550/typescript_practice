@@ -4,15 +4,14 @@ class Main {
     constructor(io) {
         this.socket = io;
     }
-    static sendMessage(message) {
-        console.log(message);
-        this.socket.emit('chat', message);
-    }
     onConnection(connectedSocket) {
-        connectedSocket.on('message', Main.sendMessage);
+        const broadcast = this.socket.broadcast;
+        connectedSocket.on('message', (message) => {
+            broadcast.emit('chat', message);
+        });
     }
     connect() {
-        Main.socket.on('connection', this.onConnection);
+        this.socket.on('connection', this.onConnection);
     }
 }
 exports.default = Main;
