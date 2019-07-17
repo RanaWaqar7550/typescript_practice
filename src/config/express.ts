@@ -1,23 +1,31 @@
 import express from 'express';
+import * as bodyParser from 'body-parser';
 import cors from 'cors';
+import { IRequest, IResponse, IApplication } from '../interfaces';
 
 /**
- * Express instance
- * @public
+ * @name App class
+ * @description Express Application
  */
-const app : any = express();
+class App {
+  public app : IApplication;
+  constructor () {
+    // run the express instance and store in app
+    this.app = express();
+    this.config();
+    this.routes();
+  }
+  private config () : void {
+    this.app.use(cors());
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.static('src/Pages'));
+  }
 
-// enable CORS - Cross Origin Resource Sharing
-app.use(cors());
-
-app.use(express.static('src/Pages'));
-
-app.get('/', (req : any, res : any) : void => {
-  res.end('Working');
-});
-
-app.get('/ping', (req : any, res : any) : void => {
-  res.send('pong');
-});
-
-export { app };
+  private routes () : void {
+    this.app.get('/', (req : IRequest, res : IResponse) : void => {
+      res.end('working');
+    });
+  }
+}
+export default new App().app;

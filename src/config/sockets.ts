@@ -2,8 +2,11 @@ import SocketIO from 'socket.io';
 
 import Main from '../sockets/index';
 
+/**
+ * @name Sockets class
+ */
 export default class Sockets {
-    io : any;
+    private io : SocketIO.SocketIOSever.Socket;
     constructor (server : any) {
         this.io = new SocketIO({
             path: '/socket.io',
