@@ -1,8 +1,9 @@
 import express from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors';
-import { IRequest, IResponse, IApplication } from '../interfaces';
 
+import { IRequest, IResponse, IApplication } from '../interfaces';
+import routes from '../api/routes';
 /**
  * @name App class
  * @description Express Application
@@ -26,6 +27,7 @@ class App {
     this.app.get('/', (req : IRequest, res : IResponse) : void => {
       res.end('working');
     });
+    this.app.use('/api', routes);
   }
 }
 export default new App().app;
