@@ -1,4 +1,4 @@
-# typescript_practice
+# Setup
 First of all please write the following command to install dependencies.
 ```bash
 npm install
