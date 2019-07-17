@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && ts-node app.ts",
-    "start:watch": "nodemon",
+    "start": "tsc && ts-node app.ts",
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsLint": "./node_modules/.bin/tslint  src --ext .ts",
     "fixTsLint": "./node_modules/.bin/tslint --project *.ts"
@@ -32,7 +32,7 @@
       "src",
       "app.ts"
     ],
-    "exec": "npm run dev",
+    "exec": "npm start",
     "ext": "ts"
   }
 }
