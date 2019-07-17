@@ -1,17 +1,21 @@
 export default class Main {
-    socket: any;
+    mainSocket: any;
     constructor(io) {
-        this.socket = io;
+        this.mainSocket = io;
     }
 
     onConnection(connectedSocket: any): void {
-        connectedSocket.on('message', (message: string): void => {
-            connectedSocket.emit('chat', message);
+        connectedSocket.on('join_room', (room: string, username: string): void => {
+            connectedSocket.join(room);
+            connectedSocket.username = username;
+        });
+        connectedSocket.on('message', (room: string, message: string): void => {
+            const { username } = connectedSocket;
+            this.mainSocket.to(room).emit('chat', username, message);
         });
     }
 
     connect(): void {
-        this.socket.join('room:1')
-        this.socket.on('connection', this.onConnection);
+        this.mainSocket.on('connection', this.onConnection.bind(this));
     }
 }

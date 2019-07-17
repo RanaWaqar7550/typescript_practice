@@ -16,6 +16,7 @@
     </style>
   </head>
   <body>
+    <h1>Second User</h1>
     <ul id="messages"></ul>
     <div id="note"></div>
     <form id="form" class="hide">
@@ -39,7 +40,7 @@
   const joinRoom = document.getElementById('joinRoom');
   const typing = document.getElementById('typing');
   joinRoom.onclick = event => {
-      socket.emit('join_room', 'room:1');
+      socket.emit('join_room', 'room:1', 'secondUser');
       event.target.remove();
       form.classList.remove("hide");
   }
@@ -50,9 +51,8 @@
       console.log('Received Ping: ', data);
   });
 
-  socket.on('chat', function(msg, callback){
-      $('#messages').append($('<li>').text(msg.body));
-      callback(true);
+  socket.on('chat', function(username, msg){
+      $('#messages').append($('<li>').html(`<b>${username}:</b> ${msg}`));
     });
   socket.on('connect', () => {
       console.log('connected')
@@ -76,6 +76,7 @@
 
   form.onsubmit = (event) => {
       event.preventDefault();
-      socket.emit('message', message.value);
+      socket.emit('message', 'room:1', message.value);
+      message.value = '';
   }
 </script>
