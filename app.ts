@@ -2,8 +2,9 @@ import http from 'http';
 
 import app from './src/config/express';
 import Sockets from './src/config/sockets';
-import { IError, IMainSocket } from './src/interfaces';
+import { IError, IMainSocket, IMongoDB } from './src/interfaces';
 import { SERVER_PORT } from './src/utils/constants';
+import MongoDB from './src/config/mongodb';
 
 /**
  * @name Main class
@@ -17,6 +18,7 @@ class Main {
     this.port = SERVER_PORT;
     this.listenSockets();
     this.listenServer();
+    this.databaseConnect();
   }
   /**
    * @name listenSockets
@@ -27,6 +29,10 @@ class Main {
     socket.startEvents();
   }
 
+  private databaseConnect() : void {
+    const mongo : IMongoDB = new MongoDB();
+    mongo.connectMongo();
+  }
   private listenServer() : void {
     this.server.listen(this.port, (err: IError): void => {
       if (err) {

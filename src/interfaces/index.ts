@@ -14,3 +14,7 @@ export interface IRouter extends Router { }
 export interface IMainSocket {
     startEvents () : void;
 }
+
+export interface IMongoDB {
+    connectMongo () : void;
+}
