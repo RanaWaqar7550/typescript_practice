@@ -3,6 +3,7 @@ import http from 'http';
 import app from './src/config/express';
 import Sockets from './src/config/sockets';
 import { IError, IMainSocket } from './src/interfaces';
+import { SERVER_PORT } from './src/utils/constants';
 
 /**
  * @name Main class
@@ -10,10 +11,10 @@ import { IError, IMainSocket } from './src/interfaces';
  */
 class Main {
   private server;
-  private port : number;
+  private port : string;
   constructor() {
     this.server = http.createServer(app);
-    this.port = 3000;
+    this.port = SERVER_PORT;
     this.listenSockets();
     this.listenServer();
   }
