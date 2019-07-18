@@ -13,18 +13,17 @@ export interface INextFunction extends NextFunction { }
  * @description typed interfaces
  */
 export interface IMainSocket {
-    startEvents () : void;
+    startEvents(): void;
 }
 
 export interface IMongoDB {
-    connectMongo () : void;
+    connectMongo(): void;
 }
 
-export interface RouteDefinition {
-    // Path to our route
-    path: string;
-    // HTTP Request method (get, post, ...)
-    requestMethod: 'get' | 'post' | 'delete' | 'options' | 'put';
-    // Method name within our class responsible for this route
-    methodName: string;
-  }
+export interface IAPIError extends Error {
+    status : number;
+    data : object;
+    success : boolean;
+    message : string;
+    errors : Array<object>
+}

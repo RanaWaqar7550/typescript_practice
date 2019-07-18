@@ -3,9 +3,10 @@ import * as bodyParser from 'body-parser';
 import cors from 'cors';
 import 'reflect-metadata';
 import path from 'path';
-import { useExpressServer } from "routing-controllers";
+import { useExpressServer, createExpressServer } from "routing-controllers";
 
-import { IRequest, IResponse, IApplication, RouteDefinition } from '../interfaces';
+import { IRequest, IResponse, IApplication, IError } from '../interfaces';
+import error from '../api/middlewares/error';
 import UserController from '../api/controllers/users';
 
 /**
@@ -17,8 +18,8 @@ class App {
   constructor() {
     // run the express instance and store in app
     this.app = express();
-    this.config();
     this.pingRoutes();
+    this.config();
   }
   private config(): void {
     this.app.use(cors());
@@ -26,8 +27,10 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(express.static('src/Pages'));
     useExpressServer(this.app, {
-      controllers: [UserController]
-  })
+      controllers: [path.join(__dirname, '../api/controllers/**/*.ts')],
+      defaultErrorHandler: false
+    });
+    this.app.use(error);
   }
 
   private pingRoutes(): void {

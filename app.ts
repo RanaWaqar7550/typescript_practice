@@ -4,7 +4,7 @@ import app from './src/config/express';
 import Sockets from './src/config/sockets';
 import { IError, IMainSocket, IMongoDB } from './src/interfaces';
 import { SERVER_PORT } from './src/utils/constants';
-import MongoDB from './src/config/mongodb';
+import { MongoDB } from './src/config/mongodb';
 
 /**
  * @name Main class
