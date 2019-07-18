@@ -24,8 +24,11 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "express-validation": "^1.0.2",
+    "joi": "^14.3.1",
     "mongodb": "^3.2.7",
     "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.7.7",
     "socket.io": "^2.2.0"
   },
   "nodemonConfig": {

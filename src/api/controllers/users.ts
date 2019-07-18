@@ -1,13 +1,15 @@
 import { IRequest, IResponse, INextFunction } from '../../interfaces';
-import Controller from '../decorators/controller';
-import Get from '../decorators/route';
+import userValidation from '../validations/user';
+import {Controller, Param, Body, Get, Post, Put, Delete, Req, Res, UseBefore} from "routing-controllers";
+import validate from 'express-validation';
 /**
  * @name UserController class
  */
 @Controller('/api')
+@UseBefore(validate(userValidation.registerFields))
 export default class UsersController {
-    @Get('/hello')
-    register(req : IRequest, res : IResponse ,next : INextFunction ) : void {
-        res.end('hello')
+    @Post("/users")
+    register(@Req() request: IRequest, @Res() res: IResponse, next : INextFunction) : void {
+       return res.end('hello');
     }
 }
