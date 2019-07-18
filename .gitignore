@@ -8,3 +8,5 @@ Cache/
 storage.json
 # Network file
 Network Persistent State
+# .env file
+.env
