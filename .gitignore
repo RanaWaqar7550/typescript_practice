@@ -2,3 +2,11 @@
 dist/
 # node_modules folder
 node_modules/
+# Cache
+Cache/
+# storage.json file
+storage.json
+# Network file
+Network Persistent State
+# .env file
+.env
